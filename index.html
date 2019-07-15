@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+    
+<body>
+
+    <div>
+    <p id="directions-text">Press r, p or s to start playing!</p>
+    <p id="userchoice-text"></p>
+    <p id="computerchoice-text"></p>
+    <p id="winCount-text"></p>
+    <p id="lossCount-text"></p>
+    <p id="ties-text"></p>
+    </div>
+
+    <script type="text/javascript">
+    var computerChoices = ["r", "p", "s"];
+
+    var winCount = 0;
+    var lossCount = 0;
+    var ties = 0;
+
+    var directionsText = document.getElementById("directions-text");
+    var userChoiceText = document.getElementById("userchoice-text");
+    var computerChoiceText = document.getElementById("computerchoice-text");
+    var winCountText = document.getElementById("winCount-text");
+    var lossCountText = document.getElementById("lossCount-text");
+    var tiesText = document.getElementById("ties-text");
+
+    document.onkeyup = function(event) {
+
+        var userGuess = event.key;
+
+        var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+
+        if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+
+        if ((userGuess === "r" && computerGuess === "s") ||
+            (userGuess === "s" && computerGuess === "p") || 
+            (userGuess === "p" && computerGuess === "r")) {
+            winCount++;
+        } else if (userGuess === computerGuess) {
+            ties++;
+        } else {
+            lossCount++;
+        }
+
+        directionsText.textContent = "";
+
+        userChoiceText.textContent = "You chose: " + userGuess;
+        computerChoiceText.textContent = "The computer chose: " + computerGuess;
+        winCountText.textContent = "winCount: " + winCount;
+        lossCountText.textContent = "lossCount: " + lossCount;
+        tiesText.textContent = "ties: " + ties;
+        }
+    };
+    </script>
+
+</body>
+
+</html>  
